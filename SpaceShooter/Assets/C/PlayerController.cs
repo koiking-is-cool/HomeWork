@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float moveSpeed;
-	float mhorizontal = Input.GetAxis("Horizontal");
-	float mvertical = Input.GetAxis("Vertical");
 
 	// Use this for initialization
 	void Start () {
@@ -16,11 +14,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (moveSpeed*mhorizontal*Time.deltaTime,0f,moveSpeed*mvertical*Time.deltaTime);
-		//rigidbody.position = new Vector3 (
-			//Mathf.Clamp (rigidbody.postion.x, xMin, xMax)
-				//, 0.0f
-				//, Mathf.Clamp (rigidbody.postion.z, zMin, zMax)
-		//);
+		float mhorizontal = Input.GetAxis("Horizontal");
+		float mvertical = Input.GetAxis("Vertical");
+		//transform.Translate (moveSpeed*mhorizontal*Time.deltaTime,0f,moveSpeed*mvertical*Time.deltaTime);
+		Vector3 movement = new Vector3 (mhorizontal,0.0f,mvertical);
+		rigidbody.velocity = movement * moveSpeed;
 	}
 }
