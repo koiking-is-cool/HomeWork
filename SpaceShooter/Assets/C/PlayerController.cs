@@ -4,20 +4,51 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float moveSpeed;
+	public GameObject spaceShip;
+	public float tilt;
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Rigidbody>().position = Vector3.zero;
-		moveSpeed = 10f;
+		//spaceship not tilt
+		GetComponent<Rigidbody> ().rotation = Quaternion.identity;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float mhorizontal = Input.GetAxis("Horizontal");
-		float mvertical = Input.GetAxis("Vertical");
-		//transform.Translate (moveSpeed*mhorizontal*Time.deltaTime,0f,moveSpeed*mvertical*Time.deltaTime);
-		Vector3 movement = new Vector3 (mhorizontal,0.0f,mvertical);
-		rigidbody.velocity = movement * moveSpeed;
+		if(Input.GetKey(KeyCode.LeftArrow)
+			&&spaceShip.gameObject.transform.position.x>=-11.5f)
+		{
+			spaceShip.gameObject.transform.position = new Vector3
+			(
+			spaceShip.gameObject.transform.position.x-1
+			,spaceShip.gameObject.transform.position.y
+			,spaceShip.gameObject.transform.position.z
+			);
+		}
+		else if(Input.GetKey(KeyCode.RightArrow)
+			&&spaceShip.gameObject.transform.position.x<=11.5f){
+			spaceShip.gameObject.transform.position = new Vector3
+				(
+					spaceShip.gameObject.transform.position.x+1
+					,spaceShip.gameObject.transform.position.y
+					,spaceShip.gameObject.transform.position.z
+				);
+		}else if(Input.GetKey(KeyCode.UpArrow)
+			&&spaceShip.gameObject.transform.position.z<=7.4f){
+			spaceShip.gameObject.transform.position = new Vector3
+				(
+					 spaceShip.gameObject.transform.position.x
+					,spaceShip.gameObject.transform.position.y
+					,spaceShip.gameObject.transform.position.z+1
+				);
+		}else if(Input.GetKey(KeyCode.DownArrow)
+			&&spaceShip.gameObject.transform.position.z>=-3.4f){
+			spaceShip.gameObject.transform.position = new Vector3
+				(
+					 spaceShip.gameObject.transform.position.x
+					,spaceShip.gameObject.transform.position.y
+					,spaceShip.gameObject.transform.position.z-1
+				);
+		}
 	}
 }
