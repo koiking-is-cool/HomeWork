@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//spaceship not tilt
-		GetComponent<Rigidbody> ().rotation = Quaternion.identity;
+//		GetComponent<Rigidbody> (spaceShip).rotation = Quaternion.Euler(1,0,0);
 	}
 	
 	// Update is called once per frame
